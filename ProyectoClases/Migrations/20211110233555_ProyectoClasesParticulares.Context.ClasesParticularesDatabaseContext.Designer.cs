@@ -10,14 +10,14 @@ using ProyectoNT.Context;
 namespace ProyectoClases.Migrations
 {
     [DbContext(typeof(ClasesParticularesDatabaseContext))]
-    [Migration("20211110220901_ProyectoClases.Context.ClasesParticularesDatabaseContext")]
-    partial class ProyectoClasesContextClasesParticularesDatabaseContext
+    [Migration("20211110233555_ProyectoClasesParticulares.Context.ClasesParticularesDatabaseContext")]
+    partial class ProyectoClasesParticularesContextClasesParticularesDatabaseContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 

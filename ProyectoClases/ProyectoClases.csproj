@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211110230339_PryectoClases.Context.ClasesParticularesDatabaseContext.cs" />
+    <Compile Remove="Migrations\20211110230339_PryectoClases.Context.ClasesParticularesDatabaseContext.Designer.cs" />
+    <Compile Remove="Migrations\20211110233210_ProyectoClasesParticulares.Context.ClasesParticularesDatabaseContext.cs" />
+    <Compile Remove="Migrations\20211110233210_ProyectoClasesParticulares.Context.ClasesParticularesDatabaseContext.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">
