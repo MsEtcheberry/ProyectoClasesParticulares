@@ -12,6 +12,10 @@ namespace ProyectoNT.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int idMateria { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Ingrese el nombre")]
+        [Display(Name = "Nombre")]
         public string nombre { get; set; }
     }
 }
