@@ -20,6 +20,7 @@ namespace ProyectoClases.Controllers
 
         public IActionResult Index()
         {
+            // fijarse si hay que pasar algun view data
             return View();
         }
 

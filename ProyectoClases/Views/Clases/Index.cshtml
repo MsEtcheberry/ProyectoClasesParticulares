@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.tema)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idMateria)
+                @Html.DisplayNameFor(model => model.materia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idAlumno)
+                @Html.DisplayNameFor(model => model.alumno)
             </th>
             <th></th>
         </tr>
@@ -37,10 +37,10 @@
                 @Html.DisplayFor(modelItem => item.tema)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.idMateria)
+                @Html.DisplayFor(modelItem => item.materia.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.idAlumno)
+                @Html.DisplayFor(modelItem => item.alumno.apellido)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.idClase">Edit</a> |

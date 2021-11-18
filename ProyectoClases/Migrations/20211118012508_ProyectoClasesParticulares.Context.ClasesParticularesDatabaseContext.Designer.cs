@@ -10,7 +10,7 @@ using ProyectoNT.Context;
 namespace ProyectoClases.Migrations
 {
     [DbContext(typeof(ClasesParticularesDatabaseContext))]
-    [Migration("20211110233555_ProyectoClasesParticulares.Context.ClasesParticularesDatabaseContext")]
+    [Migration("20211118012508_ProyectoClasesParticulares.Context.ClasesParticularesDatabaseContext")]
     partial class ProyectoClasesParticularesContextClasesParticularesDatabaseContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,9 @@ namespace ProyectoClases.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("escuela")
                         .HasColumnType("nvarchar(max)");
@@ -41,10 +43,13 @@ namespace ProyectoClases.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("mail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("idAlumno");
 
@@ -58,29 +63,24 @@ namespace ProyectoClases.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("alumnoidAlumno")
+                    b.Property<int>("AlumnoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MateriaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("fechaYHora")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("idAlumno")
-                        .HasColumnType("int");
-
-                    b.Property<int>("idMateria")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("materiaidMateria")
-                        .HasColumnType("int");
-
                     b.Property<string>("tema")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idClase");
 
-                    b.HasIndex("alumnoidAlumno");
+                    b.HasIndex("AlumnoId");
 
-                    b.HasIndex("materiaidMateria");
+                    b.HasIndex("MateriaId");
 
                     b.ToTable("Clases");
                 });
@@ -93,15 +93,21 @@ namespace ProyectoClases.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("apellido")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<string>("mail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idDocente");
@@ -120,6 +126,7 @@ namespace ProyectoClases.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("idMateria");
@@ -133,11 +140,15 @@ namespace ProyectoClases.Migrations
                 {
                     b.HasOne("ProyectoNT.Models.Alumno", "alumno")
                         .WithMany()
-                        .HasForeignKey("alumnoidAlumno");
+                        .HasForeignKey("AlumnoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProyectoNT.Models.Materia", "materia")
                         .WithMany()
-                        .HasForeignKey("materiaidMateria");
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProyectoNT.Models.Materia", b =>

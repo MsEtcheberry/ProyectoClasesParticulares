@@ -22,7 +22,8 @@ namespace ProyectoClases.Controllers
         // GET: Clases
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clases.ToListAsync());
+            var clasesParticularesDatabaseContext = _context.Clases.Include(c => c.alumno).Include(c => c.materia);
+            return View(await clasesParticularesDatabaseContext.ToListAsync());
         }
 
         // GET: Clases/Details/5
@@ -34,6 +35,8 @@ namespace ProyectoClases.Controllers
             }
 
             var clase = await _context.Clases
+                .Include(c => c.alumno)
+                .Include(c => c.materia)
                 .FirstOrDefaultAsync(m => m.idClase == id);
             if (clase == null)
             {
@@ -46,6 +49,8 @@ namespace ProyectoClases.Controllers
         // GET: Clases/Create
         public IActionResult Create()
         {
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido");
+            ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace ProyectoClases.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idClase,fechaYHora,tema,idMateria,idAlumno")] Clase clase)
+        public async Task<IActionResult> Create([Bind("idClase,fechaYHora,tema,MateriaId,AlumnoId")] Clase clase)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +67,8 @@ namespace ProyectoClases.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }
 
@@ -78,6 +85,8 @@ namespace ProyectoClases.Controllers
             {
                 return NotFound();
             }
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }
 
@@ -86,7 +95,7 @@ namespace ProyectoClases.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idClase,fechaYHora,tema,idMateria,idAlumno")] Clase clase)
+        public async Task<IActionResult> Edit(int id, [Bind("idClase,fechaYHora,tema,MateriaId,AlumnoId")] Clase clase)
         {
             if (id != clase.idClase)
             {
@@ -113,6 +122,8 @@ namespace ProyectoClases.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }
 
@@ -125,6 +136,8 @@ namespace ProyectoClases.Controllers
             }
 
             var clase = await _context.Clases
+                .Include(c => c.alumno)
+                .Include(c => c.materia)
                 .FirstOrDefaultAsync(m => m.idClase == id);
             if (clase == null)
             {

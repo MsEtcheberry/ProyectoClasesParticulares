@@ -25,12 +25,16 @@ namespace ProyectoNT.Models
         [Display(Name = "Tema")]
         public string tema { get; set; }
 
-        public int idMateria { get; set; }
+        [Display(Name = "Materia")]
+        public int MateriaId { get; set; }
 
+        [Display(Name = "Materia")]
         public Materia materia { get; set; }
-        
-        public int idAlumno { get; set; }
-        
+
+        [Display(Name = "Alumno")]
+        public int AlumnoId { get; set; }
+
+        [Display(Name = "Alumno")]
         public Alumno alumno { get; set; }
 
     }
