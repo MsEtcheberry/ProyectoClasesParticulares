@@ -49,7 +49,7 @@ namespace ProyectoClases.Controllers
         // GET: Clases/Create
         public IActionResult Create()
         {
-            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido");
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "nombreCompleto");
             ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre");
             return View();
         }
@@ -67,7 +67,7 @@ namespace ProyectoClases.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "nombreCompleto", clase.AlumnoId);
             ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }
@@ -85,7 +85,7 @@ namespace ProyectoClases.Controllers
             {
                 return NotFound();
             }
-            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "nombreCompleto", clase.AlumnoId);
             ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }
@@ -122,7 +122,7 @@ namespace ProyectoClases.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "apellido", clase.AlumnoId);
+            ViewData["AlumnoId"] = new SelectList(_context.Alumnos, "idAlumno", "nombreCompleto", clase.AlumnoId);
             ViewData["MateriaId"] = new SelectList(_context.Materias, "idMateria", "nombre", clase.MateriaId);
             return View(clase);
         }

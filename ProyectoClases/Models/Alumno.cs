@@ -40,7 +40,14 @@ namespace ProyectoNT.Models
         [DataType(DataType.Text)]
         [Display(Name = "Grado")]
         public string grado { get; set; }
-        
+
+        public string nombreCompleto
+        {
+            get
+            {
+                return nombre + " " + apellido;
+            }
+        }
     }
 
 }
